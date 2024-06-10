@@ -1,60 +1,81 @@
-import { Text, type TextProps, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, Linking } from 'react-native';
+import { Button, Icon } from 'react-native-elements';
 
-import { useThemeColor } from '@/hooks/useThemeColor';
-
-export type ThemedTextProps = TextProps & {
-  lightColor?: string;
-  darkColor?: string;
-  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
-};
-
-export function ThemedText({
-  style,
-  lightColor,
-  darkColor,
-  type = 'default',
-  ...rest
-}: ThemedTextProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+const ThemedText = ({ navigation }: any) => {
+  const openLink = (url: string) => {
+    Linking.openURL(url).catch((err) => console.error("Couldn't load page", err));
+  };
 
   return (
-    <Text
-      style={[
-        { color },
-        type === 'default' ? styles.default : undefined,
-        type === 'title' ? styles.title : undefined,
-        type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
-        type === 'subtitle' ? styles.subtitle : undefined,
-        type === 'link' ? styles.link : undefined,
-        style,
-      ]}
-      {...rest}
-    />
+    <View style={styles.container}>
+      <Button
+        title="Noticias"
+        onPress={() => navigation.navigate('Noticias')}
+        icon={<Icon name="newspaper-outline" type="ionicon" color="#fff" />}
+        buttonStyle={[styles.button, styles.noticiasButton]}
+        containerStyle={styles.buttonContainer}
+      />
+      <Button
+        title="Youtube"
+        onPress={() => openLink('https://www.youtube.com/watch?v=bR7tGiJtkN4')}
+        icon={<Icon name="logo-youtube" type="ionicon" color="#fff" />}
+        buttonStyle={[styles.button, styles.youtubeButton]}
+        containerStyle={styles.buttonContainer}
+      />
+      <Button
+        title="Facebook"
+        onPress={() => openLink('https://www.facebook.com/arturo.montalvo.3954')}
+        icon={<Icon name="logo-facebook" type="ionicon" color="#fff" />}
+        buttonStyle={[styles.button, styles.facebookButton]}
+        containerStyle={styles.buttonContainer}
+      />
+      <Button
+        title="Instagram"
+        onPress={() => openLink('https://www.instagram.com/arturomontalvo2003/')}
+        icon={<Icon name="logo-instagram" type="ionicon" color="#fff" />}
+        buttonStyle={[styles.button, styles.instagramButton]}
+        containerStyle={styles.buttonContainer}
+      />
+      <Button
+        title="Whatsapp"
+        onPress={() => openLink('https://web.whatsapp.com/')}
+        icon={<Icon name="logo-whatsapp" type="ionicon" color="#fff" />}
+        buttonStyle={[styles.button, styles.whatsappButton]}
+        containerStyle={styles.buttonContainer}
+      />
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  default: {
-    fontSize: 16,
-    lineHeight: 24,
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  defaultSemiBold: {
-    fontSize: 16,
-    lineHeight: 24,
-    fontWeight: '600',
+  button: {
+    padding: 15,
   },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    lineHeight: 32,
+  buttonContainer: {
+    width: '80%',
+    marginVertical: 10,
   },
-  subtitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  noticiasButton: {
+    backgroundColor: '#007AFF',
   },
-  link: {
-    lineHeight: 30,
-    fontSize: 16,
-    color: '#0a7ea4',
+  youtubeButton: {
+    backgroundColor: '#FF0000',
+  },
+  facebookButton: {
+    backgroundColor: '#4267B2',
+  },
+  instagramButton: {
+    backgroundColor: '#C13584',
+  },
+  whatsappButton: {
+    backgroundColor: '#25D366',
   },
 });
+
+export default ThemedText;
