@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet, Image } from 'react-native';
 import { Button, Card, Text } from '@rneui/themed';
+import * as Animatable from 'react-native-animatable';
+
 
 export function Noticias({ navigation }: any) {
   const data = [
@@ -43,20 +45,27 @@ export function Noticias({ navigation }: any) {
       </View>
       <ScrollView>
         {data.map((d, index) => (
-          <Card key={index} containerStyle={styles.card}>
-            <Card.Title style={styles.cardTitle}>{d.titulo}</Card.Title>
-            <Card.Divider />
-            {d.imagen !== '' && (
-              <Image source={{ uri: d.imagen }} style={styles.cardImage} />
-            )}
-            <Text style={styles.cardContent}>{d.contenido}</Text>
-            <Button
-              title="Ver más..."
-              onPress={() => navigation.navigate('Home')}
-              buttonStyle={styles.button}
-              containerStyle={styles.buttonContainer}
-            />
-          </Card>
+          <Animatable.View
+            key={index}
+            animation="fadeInUp"
+            delay={index * 400}
+            style={styles.cardContainer}
+          >
+            <Card containerStyle={styles.card}>
+              <Card.Title style={styles.cardTitle}>{d.titulo}</Card.Title>
+              <Card.Divider />
+              {d.imagen !== '' && (
+                <Image source={{ uri: d.imagen }} style={styles.cardImage} />
+              )}
+              <Text style={styles.cardContent}>{d.contenido}</Text>
+              <Button
+                title="Ver más..."
+                onPress={() => navigation.navigate('Home')}
+                buttonStyle={styles.button}
+                containerStyle={styles.buttonContainer}
+              />
+            </Card>
+          </Animatable.View>
         ))}
       </ScrollView>
     </View>
@@ -78,10 +87,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 24,
   },
+  cardContainer: {
+    marginBottom: 20,
+  },
   card: {
     borderRadius: 8,
     padding: 15,
-    marginBottom: 20,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
   },
   cardTitle: {
     fontSize: 18,

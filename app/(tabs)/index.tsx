@@ -9,6 +9,7 @@ import DimasScreen from './Dimas';
 import { Noticias } from '@/components/Noticias';
 import { Button, Icon } from 'react-native-elements';
 import { Card } from 'react-native-elements';
+import Form from '@/components/Formulario';
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,7 @@ export default function HomeScreen() {
       <Stack.Screen name="Home" component={ThemedText}/>
       <Stack.Screen name="Dimas" component={DimasScreen} options = {{headerShown: false }}  />
       <Stack.Screen name="Noticias" component={Noticias}options = {{headerShown: false }} />
+      <Stack.Screen name="Formulario" component={Form} options = {{headerShown: false }} />
 
 
     </Stack.Navigator>

@@ -17,6 +17,13 @@ const ThemedText = ({ navigation }: any) => {
         containerStyle={styles.buttonContainer}
       />
       <Button
+        title="Formulario"
+        onPress={() => navigation.navigate('Formulario')}
+        icon={<Icon name="document-text-outline" type="ionicon" color="#fff" />}
+        buttonStyle={[styles.button, styles.formButton]}
+        containerStyle={styles.buttonContainer}
+      />
+      <Button
         title="Youtube"
         onPress={() => openLink('https://www.youtube.com/watch?v=bR7tGiJtkN4')}
         icon={<Icon name="logo-youtube" type="ionicon" color="#fff" />}
@@ -63,6 +70,9 @@ const styles = StyleSheet.create({
   },
   noticiasButton: {
     backgroundColor: '#007AFF',
+  },
+  formButton: {
+    backgroundColor: '#E5DA00',
   },
   youtubeButton: {
     backgroundColor: '#FF0000',
