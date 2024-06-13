@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   button: {
-    backgroundColor: '#E5DA00',
+    backgroundColor: '#BFB605',
     marginTop: 16,
   },
 });
